@@ -193,7 +193,7 @@ function addTooltipProjectInfo() {
 }
 
 function addTooltipGraphInfo() {
-    description_graph_info = "<strong>Graph nodes:</strong> " + currentGraph.nodes.length + "<br>" + "<strong>Graph edges:</strong> " + currentGraph.links.length + "<br>" + "<strong>Charge force:</strong> " + currentChargeForce
+    description_graph_info = "<strong>Graph nodes:</strong> " + currentGraph.nodes.length + "<br>" + "<strong>Graph edges:</strong> " + currentGraph.edges.length + "<br>" + "<strong>Charge force:</strong> " + currentChargeForce
     const badgeGraphInfoTooltip = new bootstrap.Tooltip(document.getElementById('badge_graph_info'), {});
     badgeGraphInfoTooltip._config.title = description_graph_info
 }

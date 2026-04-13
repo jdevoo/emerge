@@ -419,7 +419,7 @@ function startWithGraph(graphType, chargeForce = currentChargeForce, linkDistanc
     addTooltipSemanticSearch();
     addTooltipClusterHulls();
     
-    currentGraph.links.forEach((d) => {
+    currentGraph.edges.forEach((d) => {
         linkedByIndex[`${d.source},${d.target}`] = true;
     });
     
@@ -507,7 +507,7 @@ function startWithGraph(graphType, chargeForce = currentChargeForce, linkDistanc
     .on("tick", simulationUpdate);
     
     simulation.force("link")
-    .links(currentGraph.links);
+    .links(currentGraph.edges);
 }
 
 // Based on https://bl.ocks.org/jodyphelan/5dc989637045a0f48418101423378fbd
@@ -705,7 +705,7 @@ function enableNodeSelection() {
         if (event.key == keyExpandSelection) {
             if (selectedNodesMap.length != 0) {
                 let newSelectedNodesMap = {...selectedNodesMap}
-                currentGraph.links.forEach(function(d) {
+                currentGraph.edges.forEach(function(d) {
                     if (d.source.id.toLowerCase() in selectedNodesMap || d.target.id.toLowerCase() in selectedNodesMap) {
                         newSelectedNodesMap[d.source.id.toLowerCase()] = true
                         newSelectedNodesMap[d.target.id.toLowerCase()] = true
@@ -720,7 +720,7 @@ function enableNodeSelection() {
             if (closeNode != null) {
                 selectedNodesMap[closeNode.id.toLowerCase()] = true
                 let newSelectedNodesMap = {...selectedNodesMap}
-                currentGraph.links.forEach(function(d) {
+                currentGraph.edges.forEach(function(d) {
                     if (d.source.id == closeNode.id || d.target.id == closeNode.id) {
                         newSelectedNodesMap[d.source.id.toLowerCase()] = true
                         newSelectedNodesMap[d.target.id.toLowerCase()] = true

@@ -2,7 +2,7 @@
 * * MARK: - Drawing on canvas
 */
 function drawEdges(context) {
-    currentGraph.links.forEach(function(d) {
+    currentGraph.edges.forEach(function(d) {
         
         context.beginPath();
         context.moveTo(d.source.x, d.source.y);

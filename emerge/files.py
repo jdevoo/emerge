@@ -61,10 +61,7 @@ class LanguageExtension(Enum):
 
     @staticmethod
     def valid_key(key) -> bool:
-        if any(x for x in LanguageExtension if x.name.lower() == key.lower()):
-            return True
-        else:
-            return False
+        return any(x for x in LanguageExtension if x.name.lower() == key.lower())
 
     @classmethod
     def key_for_value(cls, value):
@@ -157,5 +154,4 @@ def truncate_directory(directory: str) -> str:
         split_directory = directory.split('/')
         prefix_truncated = '/'.join(directory.split('/')[len(split_directory)-5:])
         return '.../' + prefix_truncated
-    else:
-        return directory
+    return directory

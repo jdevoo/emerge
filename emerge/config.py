@@ -40,10 +40,7 @@ class EnumKeyValid:
 
     @classmethod
     def valid(cls, key) -> bool:
-        if hasattr(cls, key.upper()):
-            return True
-        else:
-            return False
+        return hasattr(cls, key.upper())
 
 
 @unique
@@ -184,9 +181,7 @@ class Configuration:
         match = re.search(r"(.+)\((.*)\)$", value)
         if match:
             options = match.group(2)
-            if not bool(options):
-                return None
-            else:
+            if bool(options):
                 return [s.strip() for s in options.split(',')]
         return None
 

@@ -91,7 +91,6 @@ class Emerge:
                 self.start_analyzing()
             else:
                 LOGGER.error('will not start with any analysis due configuration errors')
-                return
 
     def start_with_log_level(self, level: LogLevel):
         """Sets a custom log level and starts emerge.

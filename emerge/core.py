@@ -52,9 +52,9 @@ def format_timedelta(timedelta, fmt):
     milliseconds = timedelta.microseconds / 1000
     hours, rem = divmod(timedelta.seconds, 3600)
     minutes, seconds = divmod(rem, 60)
-    delta_format["H"] = '{:02d}'.format(hours)
-    delta_format["M"] = '{:02d}'.format(minutes)
-    delta_format["S"] = '{:02d}'.format(seconds)
-    delta_format["s"] = '{:.0f}'.format(milliseconds)
+    delta_format["H"] = f"{hours:02d}"
+    delta_format["M"] = f"{minutes:02d}"
+    delta_format["S"] = f"{seconds:02d}"
+    delta_format["s"] = f"{milliseconds:.0f}"
     template = DeltaTemplate(fmt)
     return template.substitute(**delta_format)

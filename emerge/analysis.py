@@ -178,8 +178,7 @@ class Analysis:
         """
         if self._start_time and self._stop_time:
             return self._stop_time - self._start_time
-        else:
-            return None
+        return None
 
     def contains_metric_for_file_results(self, metric_name: str) -> bool:
         """Checks if the analysis contains a file result metric given by a metric name.

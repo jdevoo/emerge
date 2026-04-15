@@ -347,7 +347,9 @@ function zoomOut() {
     simulationUpdate()
 }
 
-startWithGraph('file_result_dependency_graph')
+if (currentGraphType !== undefined) {
+    startWithGraph(currentGraphType)
+}
 
 zoomOut() // initialliy zoom out a bit
 
@@ -547,7 +549,7 @@ function prepareGraphStructures() {
         graphData['file_result_dependency_graph']['overall_metric_results'] =
         file_result_dependency_graph_overall_metric_results
         graphData['file_result_dependency_graph']['cluster_metrics_map'] = file_result_dependency_graph_cluster_metrics_map
-        currentGraphType = 'file_result_dependency_graph'
+        if (currentGraphType === undefined) currentGraphType = 'file_result_dependency_graph'
     }
 
     if (typeof entity_result_dependency_graph !== 'undefined') {
@@ -557,7 +559,7 @@ function prepareGraphStructures() {
         graphData['entity_result_dependency_graph']['overall_metric_results'] =
         entity_result_dependency_graph_overall_metric_results
         graphData['entity_result_dependency_graph']['cluster_metrics_map'] = entity_result_dependency_graph_cluster_metrics_map
-        currentGraphType = 'entity_result_dependency_graph'
+        if (currentGraphType === undefined) currentGraphType = 'entity_result_dependency_graph'
     }
     
     if (typeof entity_result_inheritance_graph !== 'undefined') {
@@ -567,6 +569,7 @@ function prepareGraphStructures() {
         graphData['entity_result_inheritance_graph']['overall_metric_results'] =
         entity_result_inheritance_graph_overall_metric_results
         graphData['entity_result_inheritance_graph']['cluster_metrics_map'] = entity_result_inheritance_graph_cluster_metrics_map
+        if (currentGraphType === undefined) currentGraphType = 'entity_result_inheritance_graph'
     }
     
     if (typeof entity_result_complete_graph !== 'undefined') {
@@ -576,6 +579,7 @@ function prepareGraphStructures() {
         graphData['entity_result_complete_graph']['overall_metric_results'] =
         entity_result_complete_graph_overall_metric_results
         graphData['entity_result_complete_graph']['cluster_metrics_map'] = entity_result_complete_graph_cluster_metrics_map
+        if (currentGraphType === undefined) currentGraphType = 'entity_result_complete_graph'
     }
     
     if (typeof filesystem_graph !== 'undefined') {
@@ -584,6 +588,7 @@ function prepareGraphStructures() {
         graphData['filesystem_graph']['statistics'] = filesystem_graph_statistics
         graphData['filesystem_graph']['overall_metric_results'] = filesystem_graph_overall_metric_results
         graphData['filesystem_graph']['cluster_metrics_map'] = filesystem_graph_cluster_metrics_map
+        if (currentGraphType === undefined) currentGraphType = 'filesystem_graph'
     }
 }
 

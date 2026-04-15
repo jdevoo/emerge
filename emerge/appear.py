@@ -32,8 +32,8 @@ from emerge.log import Logger, LogLevel
 LOGGER = Logger(logging.getLogger('emerge'))
 coloredlogs.install(level='E', logger=LOGGER.logger(), fmt=Logger.log_format)
 
-__version__ = '2.0.0'
-__updated__ = '2023-05-27 12:47:04'
+__version__ = '2.0.8'
+__updated__ = '2026-04-15'
 
 
 class Emerge:

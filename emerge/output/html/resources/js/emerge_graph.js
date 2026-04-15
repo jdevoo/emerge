@@ -375,18 +375,41 @@ function drawNodeToolTip(text, xPos, yPos, nodeMetrics) {
     const allTextLabels = [text, ...codeMetricLabels, ...semanticKeywords];
     const textBoxWidth = Math.max(...allTextLabels.map(text => context.measureText(text).width));
     
+    const boxWidth = textBoxWidth + 10 * scaleFactor;
+    const boxHeight = scaledFontSize * 1.286;
+    const totalBoxHeight = boxHeight * (1 + codeMetricLabels.length + (semanticKeywords.length ? semanticKeywords.length + 1 : 0));
+
+    // Get canvas dimensions and adjusted coordinates to check for collision
+    const canvasWidth = context.canvas.width / 2; // account for 2x scaling
+    const canvasHeight = context.canvas.height / 2;
+    
+    // Current point in screen coordinates
+    const screenX = zoomTransform.applyX(xPos);
+    const screenY = zoomTransform.applyY(yPos);
+
+    let finalX = xPos;
+    let finalY = yPos;
+
+    // Flip horizontally if box goes beyond right edge
+    if (screenX + (boxWidth * zoomTransform.k) > canvasWidth - 20) {
+        finalX = xPos - boxWidth - 16 * scaleFactor;
+    }
+
+    // Flip vertically if box goes beyond bottom edge
+    if (screenY + (totalBoxHeight * zoomTransform.k) > canvasHeight - 20) {
+        finalY = yPos - totalBoxHeight + 14 * scaleFactor;
+    }
+
     // Offset text from left edge of box:
     const xTextOffset = 5 * scaleFactor;
-    const xText = xPos + xTextOffset;
+    const xText = finalX + xTextOffset;
     // Offset text from bottom edge of box:
     const yTextOffset = 5 * scaleFactor;
     // yCurrent represents the bottom edge of the box, which changes for each box:
-    let yCurrent = yPos;
+    let yCurrent = finalY;
 
     // Define dimensions of each box/row containing metrics/labels/tags:
-    const boxWidth = textBoxWidth + 2 * xTextOffset;
-    const boxHeight = scaledFontSize * 1.286;
-    const boxDefaults = { x: xPos, width: boxWidth, height: boxHeight };
+    const boxDefaults = { x: finalX, width: boxWidth, height: boxHeight };
 
     // Draw the header/title with node label:
     drawBox(context,

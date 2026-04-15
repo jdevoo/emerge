@@ -345,6 +345,20 @@ class Configuration:
             self._invalid_yaml_config(yaml_config)
             return False
 
+        for analysis in analyses:
+            source_directory = analysis[ConfigKeyAnalysis.SOURCE_DIRECTORY.name.lower()]
+            if not os.path.isdir(source_directory):
+                LOGGER.error(f'source_directory not found: {source_directory}')
+                return False
+
+            if ConfigKeyAnalysis.EXPORT.name.lower() in analysis:
+                for export_config in analysis[ConfigKeyAnalysis.EXPORT.name.lower()]:
+                    if ConfigKeyExport.DIRECTORY.name.lower() in export_config:
+                        export_directory = export_config[ConfigKeyExport.DIRECTORY.name.lower()]
+                        if not os.path.isdir(export_directory):
+                            LOGGER.error(f'export_directory not found: {export_directory}')
+                            return False
+
         self._valid_yaml_config(yaml_config)
         return True
 

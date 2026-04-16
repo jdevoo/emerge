@@ -1,10 +1,9 @@
-FROM ubuntu:22.04
+FROM python:3.10-trixie
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install --no-install-recommends -y git graphviz graphviz-dev python3-pip \
-    && yes | pip install emerge-viz
+RUN apt-get update && apt-get install --no-install-recommends -y git ca-certificates graphviz graphviz-dev
 
-USER 1002
+RUN cd / && git clone https://github.com/jdevoo/emerge.git && cd emerge && pip install wheel && pip install -r requirements.txt
 
-ENTRYPOINT ["emerge", "-c"]
+ENTRYPOINT ["python", "/emerge/emerge.py", "-c"]

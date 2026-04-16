@@ -90,7 +90,7 @@ class Emerge:
             if self.config.valid:
                 self.start_analyzing()
             else:
-                LOGGER.error('will not start with any analysis due configuration errors')
+                LOGGER.error('will not start with any analysis due to configuration errors')
 
     def start_with_log_level(self, level: LogLevel):
         """Sets a custom log level and starts emerge.

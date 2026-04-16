@@ -835,27 +835,27 @@ function createOverallMetricResults() {
 
 function createMetricsMenuEntries() {
     // create apply metrics menu entries
-    applyMetricHtml = ""
+    let applyMetricHtml = ""
 
-    console.log(currentMetricKeys)
-    
-    for (let key in currentMetricKeys) {
-
-        if ( Object.keys(metricNameMap).includes(currentMetricKeys[key]) ) {
-            
-            applyMetricHtml += '<li> &nbsp; <input data-value="'
-            applyMetricHtml += currentMetricKeys[key]
-            applyMetricHtml += '" type="checkbox" onclick="animateRadiusWithMetric(\''
-            applyMetricHtml += currentMetricKeys[key]
-            applyMetricHtml += '\');"/>&nbsp; <span id="'
-            applyMetricHtml += '" style="font-size:10px;">'
-            
-            let visibleMetricName = metricNameMap[currentMetricKeys[key]]
-            
-            applyMetricHtml += visibleMetricName
-            applyMetricHtml += '</span> <small><span id="'
-            applyMetricHtml += 'badge_' + currentMetricKeys[key]
-            applyMetricHtml += '" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" class="badge badge-primary badge-pill text-bg-primary"> ?</span> </small> &nbsp;</li>'
+    if (currentMetricKeys.length === 0) {
+        applyMetricHtml = '<li> &nbsp; <span style="font-size:10px;">No metrics available</span> &nbsp;</li>'
+    } else {
+        for (let key in currentMetricKeys) {
+            if (Object.keys(metricNameMap).includes(currentMetricKeys[key])) {
+                applyMetricHtml += '<li> &nbsp; <input data-value="'
+                applyMetricHtml += currentMetricKeys[key]
+                applyMetricHtml += '" type="checkbox" onclick="animateRadiusWithMetric(\''
+                applyMetricHtml += currentMetricKeys[key]
+                applyMetricHtml += '\');"/>&nbsp; <span id="'
+                applyMetricHtml += '" style="font-size:10px;">'
+                
+                let visibleMetricName = metricNameMap[currentMetricKeys[key]]
+                
+                applyMetricHtml += visibleMetricName
+                applyMetricHtml += '</span> <small><span id="'
+                applyMetricHtml += 'badge_' + currentMetricKeys[key]
+                applyMetricHtml += '" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" class="badge badge-primary badge-pill text-bg-primary"> ?</span> </small> &nbsp;</li>'
+            }
         }
     }
     

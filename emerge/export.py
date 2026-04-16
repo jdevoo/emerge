@@ -277,9 +277,9 @@ class D3Exporter:
                 for name, value in statistics.items():
                     json_statistics[name] = value
 
-                d3_js_string += '\n'
-                d3_js_string += 'const ' + graph_representation.graph_type.name.lower() + '_statistics = '
-                d3_js_string += json.dumps(json_statistics)
+            d3_js_string += '\n'
+            d3_js_string += 'const ' + graph_representation.graph_type.name.lower() + '_statistics = '
+            d3_js_string += json.dumps(json_statistics)
 
             if bool(overall_metric_results):
                 for name, value in overall_metric_results.items():
@@ -295,9 +295,9 @@ class D3Exporter:
                     else:
                         json_metrics[name] = round(value, 2)
 
-                d3_js_string += '\n'
-                d3_js_string += 'const ' + graph_representation.graph_type.name.lower() + '_overall_metric_results = '
-                d3_js_string += json.dumps(json_metrics)
+            d3_js_string += '\n'
+            d3_js_string += 'const ' + graph_representation.graph_type.name.lower() + '_overall_metric_results = '
+            d3_js_string += json.dumps(json_metrics)
 
             # add cluster map of nodes
             cluster_map: Dict[Any, Any] = {}

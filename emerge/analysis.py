@@ -242,6 +242,18 @@ class Analysis:
             return True
         return False
 
+    @property
+    def contains_graphs(self) -> bool:
+        """Checks if the analysis contains any graph representations.
+
+        Returns:
+            bool: True if it contains any graphs, otherwise False.
+        """
+        created_graph_representations = {k: v for (k, v) in self.graph_representations.items() if v is not None}
+        if bool(created_graph_representations):
+            return True
+        return False
+
     def calculate_metric(self, metric: AbstractMetric) -> None:
         """Calculates a metric given by any subclass of AbstractMetric, collects local and overall metric results and add metric runtime to statistics.
 

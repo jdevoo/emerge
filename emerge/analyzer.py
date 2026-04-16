@@ -89,9 +89,12 @@ class Analyzer:
         if analysis.contains_code_metrics:
             self._calculate_code_metric_results(analysis)
 
-        if analysis.contains_graph_metrics:
+        if analysis.contains_graphs:
             analysis.calculate_graph_representations()
-            self._calculate_graph_metric_results(analysis)
+
+            if analysis.contains_graph_metrics:
+                self._calculate_graph_metric_results(analysis)
+            
             analysis.add_local_metric_results_to_graphs()
 
         self._collect_all_results()

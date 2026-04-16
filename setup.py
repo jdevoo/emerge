@@ -55,8 +55,7 @@ setup(
         "python-louvain",
         "PyYAML",
         "tabulate",
-        "PyDriller",
-        "pyperclip"
+        "PyDriller"
     ],
     package_dir={
         "emerge": "emerge",

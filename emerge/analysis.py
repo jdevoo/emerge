@@ -11,7 +11,6 @@ from datetime import datetime, timedelta
 import os
 from pathlib import Path
 import coloredlogs
-import pyperclip
 
 from emerge.languages.abstractparser import AbstractResult, AbstractParser, LanguageType
 from emerge.metrics.abstractmetric import AbstractMetric, AbstractCodeMetric, AbstractGraphMetric, MetricResultFilter
@@ -332,10 +331,8 @@ class Analysis:
 
         LOGGER.info_done(f'all your generated/exported data can be found here: {resolved_export_path}')
         if self.export_d3:
-            pyperclip.copy(f'file://{resolved_export_path}/html/emerge.html')
             LOGGER.info_done(
                 f'copy the following path to your browser and start your web app: 👉 file://{resolved_export_path}/html/emerge.html')
-            LOGGER.info_done('... also tried to copy the link to your pasteboard, just try to paste it in your browser 🚀')
 
     @property
     def entity_results(self) -> Dict[str, AbstractEntityResult]:

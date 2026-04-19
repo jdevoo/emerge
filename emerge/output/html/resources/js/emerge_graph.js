@@ -99,6 +99,22 @@ function drawNodeShape(context, d, radiusOffset = 0) {
             context.beginPath();
             context.arc(d.x, d.y, d.radius + radiusOffset, 0, TWO_TIMES_PI, true);
         }
+    } else if (currentGraphType.includes('filesystem')) {
+        if (d.file === true) {
+            // Files in filesystem graph: Squares
+            context.beginPath();
+            const side = (d.radius + radiusOffset) * 2;
+            context.rect(d.x - (side / 2), d.y - (side / 2), side, side);
+        } else {
+            // Folders (non-file nodes) in filesystem graph: Diamonds
+            context.beginPath();
+            const r = d.radius + radiusOffset;
+            context.moveTo(d.x, d.y - r); // Top
+            context.lineTo(d.x + r, d.y); // Right
+            context.lineTo(d.x, d.y + r); // Bottom
+            context.lineTo(d.x - r, d.y); // Left
+            context.closePath();
+        }
     } else {
         if (d.file === true) {
             context.beginPath();

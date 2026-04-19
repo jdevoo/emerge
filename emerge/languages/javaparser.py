@@ -33,6 +33,7 @@ class JavaParsingKeyword(Enum):
     STOP_BLOCK_COMMENT = "*/"
     EXTENDS = "extends"
     IMPORT = "import"
+    STATIC = "static"
     PACKAGE = "package"
     PACKAGE_NAME = "package_name"
 
@@ -182,8 +183,9 @@ class JavaParser(AbstractParser, ParsingMixin):
             if obj == JavaParsingKeyword.IMPORT.value:
                 read_ahead_string = self.create_read_ahead_string(obj, following)
 
-                imported_entity_name = pp.Word(pp.alphanums + CoreParsingKeyword.DOT.value + CoreParsingKeyword.ASTERISK.value)
+                imported_entity_name = pp.Word(pp.alphanums + CoreParsingKeyword.DOT.value + CoreParsingKeyword.ASTERISK.value + CoreParsingKeyword.UNDERSCORE.value)
                 expression_to_match = pp.Keyword(JavaParsingKeyword.IMPORT.value) + \
+                    pp.Optional(pp.Keyword(JavaParsingKeyword.STATIC.value)) + \
                     imported_entity_name.setResultsName(CoreParsingKeyword.IMPORT_ENTITY_NAME.value) + pp.FollowedBy(CoreParsingKeyword.SEMICOLON.value)
 
                 try:

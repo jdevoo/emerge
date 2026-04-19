@@ -382,6 +382,17 @@ function startWithGraph(graphType, chargeForce = currentChargeForce, linkDistanc
     currentGraph.nodes.forEach(function(d, i) {
         d.radius = radius
         
+        // Ensure d.file is correctly set based on node properties if not already explicitly defined
+        if (d.file === undefined) {
+            if (d.directory === true) {
+                d.file = false;
+            } else if (d.hasOwnProperty('result_name') || d.hasOwnProperty('metric_sloc_in_file')) {
+                d.file = true;
+            } else {
+                d.file = false;
+            }
+        }
+
         if (!d.hasOwnProperty('metrics')) {
             d.metrics = {}
         }

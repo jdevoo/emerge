@@ -86,21 +86,43 @@ function drawEdges(context) {
     });
 }
 
+function drawNodeShape(context, d, radiusOffset = 0) {
+    if (currentGraphType.includes('entity_result')) {
+        context.beginPath();
+        context.arc(d.x, d.y, d.radius + radiusOffset, 0, TWO_TIMES_PI, true);
+    } else if (currentGraphType.includes('file_result')) {
+        if (d.file === true) {
+            context.beginPath();
+            const side = (d.radius + radiusOffset) * 2;
+            context.rect(d.x - (side / 2), d.y - (side / 2), side, side);
+        } else {
+            context.beginPath();
+            context.arc(d.x, d.y, d.radius + radiusOffset, 0, TWO_TIMES_PI, true);
+        }
+    } else {
+        if (d.file === true) {
+            context.beginPath();
+            context.arc(d.x, d.y, d.radius + radiusOffset, 0, TWO_TIMES_PI, true);
+        } else {
+            context.beginPath();
+            const side = (d.radius + radiusOffset) * 2;
+            context.rect(d.x - (side / 2), d.y - (side / 2), side, side);
+        }
+    }
+}
+
 function drawNodes(context) {
     currentGraph.nodes.forEach(function(d, i) {
         
-        context.beginPath();
-        
-        //render outer circle if node was selected
+        //render outer selection shape if node was selected
         if (d.id.toLowerCase() in selectedNodesMap) {
-            
-            context.arc(d.x, d.y, d.radius + 2.0, 0, TWO_TIMES_PI);
+            drawNodeShape(context, d, 2.0);
             context.fillStyle = '#FF0000' //activeSelectionColor
             drawNodeLabel(d.id, d.x + 14, d.y - 7)
             context.fill();
         }
         
-        context.arc(d.x, d.y, d.radius, 0, TWO_TIMES_PI, true);
+        drawNodeShape(context, d);
         
         if (fadeUnselectedNodes == true || normalHeatmapIsActive() || churnHeatmapIsActive() || hotspotHeatmapIsActive()) {
             context.strokeStyle = nodeStrokeStyle
@@ -257,8 +279,7 @@ function drawNodes(context) {
         if (i == currentGraph.nodes.length - 1) { // dont call this to often due to performance
             
             if (closeNode) {
-                context.beginPath();
-                drawNode(closeNode)
+                drawNodeShape(context, closeNode);
                 
                 if (closeNode.id.toLowerCase() in selectedNodesMap) {
                     context.fillStyle = activeSelectionColor
@@ -306,7 +327,7 @@ function drawNode(d) {
 }
 
 function drawNodeHighlight(node, color, radiusOffset) {
-    context.arc(node.x, node.y, node.radius + radiusOffset, 0, TWO_TIMES_PI);
+    drawNodeShape(context, node, radiusOffset);
     context.fillStyle = color
     context.strokeStyle = color;
     context.stroke();

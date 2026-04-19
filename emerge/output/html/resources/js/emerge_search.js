@@ -1,7 +1,7 @@
 function edgeBetweenSearchTerms(sourceNode, targetNode) {
     let found = false
     searchTerms.forEach(element => {
-        if ( (sourceNode.id.toLowerCase().includes(element)) && (targetNode.id.toLowerCase().includes(element)) ) {
+        if (matches(element, sourceNode.id) && matches(element, targetNode.id)) {
             found = true
         }
     });
@@ -22,7 +22,6 @@ function searchTermsIncludedInNodeContributors(sourceNode, targetNode) {
     let found = false
     searchTerms.forEach(element => {
         if ((stringIncludedInNodeContributors(element, sourceNode) && stringIncludedInNodeContributors(element, targetNode))) {
-            console.log("edge found")
             found = true
         }
     });
@@ -32,18 +31,17 @@ function searchTermsIncludedInNodeContributors(sourceNode, targetNode) {
 function normalSearch(node) {
     let found = false
     searchTerms.forEach(element => {
-        if (node.id.toLowerCase().includes(element)) {
+        if (matches(element, node.id)) {
             found = true
         }
     });
     return found
 }
 
-// the node is included in the current search OR if the search in included in one of the node's semantic tags 
 function searchTermIncludedInNode(node) {
     let found = false
     searchTerms.forEach(element => {
-        if (node.id.toLowerCase().includes(element)) {
+        if (matches(element, node.id)) {
             found = true
         }
     });

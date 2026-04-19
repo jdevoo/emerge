@@ -366,7 +366,7 @@ function stringIncludedInNodeTags(string, node) {
     })
     
     tagProperties.forEach(function(propertyName) {
-        if (propertyName.toLowerCase().includes(string.toLowerCase())) {
+        if (matches(string, propertyName)) {
             found = true
         }
     })
@@ -381,7 +381,7 @@ function stringIncludedInNodeContributors(string, node) {
         if ('metric_git_contributors' in metrics) {
             const contributors = metrics['metric_git_contributors']
             contributors.forEach(function(name) {
-                if (name.toLowerCase().includes(string.toLowerCase())) {
+                if (matches(string, name)) {
                     found = true
                 }
             })

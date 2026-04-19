@@ -43,3 +43,11 @@ function mergeDictsToMostCurrentValues(dict1, dict2) {
     }
     return result;
 }
+function matches(term, target) {
+    try {
+        const regex = new RegExp(term, 'i');
+        return regex.test(target);
+    } catch (e) {
+        return target.toLowerCase().includes(term.toLowerCase());
+    }
+}
